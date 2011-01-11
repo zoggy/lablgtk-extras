@@ -1,0 +1,4 @@
+(** *)
+(** @datarootdir@ shut up configure *)
+
+let install_dir = "@datadir@"
