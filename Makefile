@@ -77,8 +77,9 @@ noheaders: dummy
 
 distclean: clean
 	cd src && $(MAKE) distclean
+	$(RM) autom4te.cache
 	$(RM) config.cache config.log config.status master.Makefile
-	$(RM) config_check.log ocaml_config.sh
+	$(RM) configure.lineno config_check.log ocaml_config.sh
 
 clean: dummy
 	$(RM) *~ \#*\#
