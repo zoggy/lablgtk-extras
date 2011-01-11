@@ -24,93 +24,69 @@
 #                                                                               #
 #################################################################################
 
+include ../master.Makefile
 
-include master.Makefile
+MY_INCLUDES=
+SYSTEM_INCLUDES= $(LABLGTK2_INCLUDES)
 
-SCRIPTS=
+INCLUDES=$(MY_INCLUDES) $(SYSTEM_INCLUDES)
 
-IMAGES=
+LIBS=lablgtk.cmxa lablglade.cmxa
+LIBS_BYTE=$(LIBS:.cmxa=.cma)
 
-# Compilation
-#############
+COMPFLAGS=$(INCLUDES) -annot -g -warn-error A
 
-work: src
+GELIB_CMOFILES= \
+	version.cmo \
+	install.cmo
 
-all: work srcdoc doc
+GELIB_CMXFILES=$(GELIB_CMOFILES:.cmo=.cmx)
+GELIB_CMIFILES=$(GELIB_CMOFILES:.cmo=.cmi)
 
-src: dummy
-	cd src && $(MAKE) all
+opt: $(GELIB)
+byte:  $(GELIB_BYTE)
+all: byte opt
 
-re : depend clean all
+TOOLS=
+TOOLS_BYTE=
 
+# Base
+$(GELIB): $(GELIB_CMIFILES) $(GELIB_CMXFILES)
+	$(OCAMLOPT) -a -o $@ $(GELIB_CMXFILES)
 
-# Documentation :
-#################
-srcdoc: dummy
-	cd src && $(MAKE) doc
+$(GELIB_BYTE): $(GELIB_CMIFILES) $(GELIB_CMOFILES)
+	$(OCAMLC) -a -o $@ $(GELIB_CMOFILES)
 
-doc: dummy
-	cd doc && $(MAKE) all
+#client: $(GELIB) client.ml
+#	$(OCAMLOPT) -o $@ $(INCLUDES) lablgtk.cmxa lablgnomecanvas.cmxa $^
 
-# myself
-
-master.Makefile src/version.ml src/install.ml: \
-	master.Makefile.in src/version.ml.in src/install.ml.in config.status
-	./config.status
-
-config.status: configure master.Makefile.in src/version.ml.in src/install.ml.in
-	./config.status --recheck
-
-configure: configure.ac
-	autoconf
-
-# headers :
-###########
-HEADFILES= configure.ac configure \
-	master.Makefile.in Makefile \
-	src/*.ml src/*.mli src/*.in \
-	src/Makefile doc/Makefile checkocaml.ml
-headers: dummy
-	echo $(HEADFILES)
-	headache -h header -c .headache_config `ls $(HEADFILES) `
-
-noheaders: dummy
-	headache -r -c .headache_config `ls $(HEADFILES) `
-
-# backup, clean and depend :
-############################
-
-distclean: clean
-	cd src && $(MAKE) distclean
-	cd doc && $(MAKE) distclean
-	cd utils && $(MAKE) distclean
-	$(RM) config.cache config.log config.status master.Makefile
-	$(RM) config_check.log ocaml_config.sh
-
-clean: dummy
-	$(RM) *~ \#*\#
-	cd src && $(MAKE) clean
-	cd doc && $(MAKE) clean
-	cd utils && $(MAKE) clean
-
-depend: dummy
-	cd src && $(MAKE) depend
-alldepend: dummy
-	cd src && $(MAKE) alldepend
+doc:
+	mkdir -p ocamldoc
+	ocamldoc -d ocamldoc -html $(INCLUDES) $(GELIB_CMIFILES:.cmi=.mli)
 
 dummy:
 
-#################
-# installation
-#################
+install:
+	$(MKDIR) $(BINDIR) $(LIBDIR) $(DATADIR)
+	$(CP) $(GELIB) $(GELIB_BYTE) $(GELIB_CMIFILES) $(LIBDIR)/
 
-install: dummy installimages
-	cd src && $(MAKE) install
-#	$(MAKE) installspecsfiles
-	$(MAKE) installdoc
+#	$(CP) gtk/ge.glade $(DATADIR)/
+#	$(CP) $(TOOLS) $(TOOLS_BYTE) $(BINDIR)/
 
-###########################
-# additional dependencies
-###########################
+#	$(GELIB_BYTE:.cma=.cmi) $(GELIB_BYTE:.cma=.mli)
 
-# DO NOT DELETE
+
+# Clean :
+#########
+clean:
+	$(RM) $(GENERATED_FILES) *.cm* *.so *.a *.o *.annot
+
+distclean: clean
+
+# depend :
+##########
+GENERATED_FILES=
+.depend depend: $(GENERATED_FILES)
+	$(RM) .depend
+	$(OCAMLDEP) $(OCAMLPP) *.ml *.mli > .depend
+

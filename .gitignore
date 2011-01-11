@@ -1,0 +1,16 @@
+*.cm*
+*.a
+*.o
+*.annot
+.chamo*
+master.Makefile
+config.log
+config_check.log
+ocaml_config.sh
+config.status
+autom4te.cache
+src/version.ml
+src/install.ml
+src/ocamldoc
+
+
