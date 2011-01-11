@@ -34,9 +34,7 @@ IMAGES=
 # Compilation
 #############
 
-work: src
-
-all: work srcdoc doc
+all: src srcdoc
 
 src: dummy
 	cd src && $(MAKE) all
@@ -48,9 +46,6 @@ re : depend clean all
 #################
 srcdoc: dummy
 	cd src && $(MAKE) doc
-
-doc: dummy
-	cd doc && $(MAKE) all
 
 # myself
 
@@ -69,7 +64,7 @@ configure: configure.ac
 HEADFILES= configure.ac configure \
 	master.Makefile.in Makefile \
 	src/*.ml src/*.mli src/*.in \
-	src/Makefile doc/Makefile checkocaml.ml
+	src/Makefile checkocaml.ml
 headers: dummy
 	echo $(HEADFILES)
 	headache -h header -c .headache_config `ls $(HEADFILES) `
@@ -82,16 +77,12 @@ noheaders: dummy
 
 distclean: clean
 	cd src && $(MAKE) distclean
-	cd doc && $(MAKE) distclean
-	cd utils && $(MAKE) distclean
 	$(RM) config.cache config.log config.status master.Makefile
 	$(RM) config_check.log ocaml_config.sh
 
 clean: dummy
 	$(RM) *~ \#*\#
 	cd src && $(MAKE) clean
-	cd doc && $(MAKE) clean
-	cd utils && $(MAKE) clean
 
 depend: dummy
 	cd src && $(MAKE) depend
@@ -104,10 +95,8 @@ dummy:
 # installation
 #################
 
-install: dummy installimages
+install: dummy
 	cd src && $(MAKE) install
-#	$(MAKE) installspecsfiles
-	$(MAKE) installdoc
 
 ###########################
 # additional dependencies

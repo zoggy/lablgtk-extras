@@ -90,7 +90,7 @@ if test "$bindir" = "\${exec_prefix}/bin" ; then
 fi
 
 if test "$libdir" = "\${exec_prefix}/lib" ; then
-        libdir=$OCAMLLIB/hypomnemata
+        libdir=$OCAMLLIB/gtk-extras
 fi
 
 if test "$mandir" = "\${prefix}/man" ; then
@@ -102,7 +102,7 @@ if test "$mandir" = "\${prefix}/man" ; then
 fi
 
 if test "$datadir" = "\${datarootdir}" ; then
-        datadir=${prefix}/share/hypomnemata
+        datadir=${prefix}/share/gtk-extras
 fi
 if test "$datadir" = "\${prefix}/share" ; then
         datadir=$prefix/share

@@ -38,7 +38,13 @@ COMPFLAGS=$(INCLUDES) -annot -g -warn-error A
 
 GELIB_CMOFILES= \
 	version.cmo \
-	install.cmo
+	install.cmo \
+	gstuff.cmo \
+	okey.cmo \
+	gdir.cmo \
+	gmylist.cmo \
+	gmytree.cmo \
+	gtksv_utils.cmo
 
 GELIB_CMXFILES=$(GELIB_CMOFILES:.cmo=.cmx)
 GELIB_CMIFILES=$(GELIB_CMOFILES:.cmo=.cmi)
@@ -63,6 +69,11 @@ $(GELIB_BYTE): $(GELIB_CMIFILES) $(GELIB_CMOFILES)
 doc:
 	mkdir -p ocamldoc
 	ocamldoc -d ocamldoc -html $(INCLUDES) $(GELIB_CMIFILES:.cmi=.mli)
+
+camlget:
+	mkdir -p ocamldoc
+	ocamldoc -sort -d ocamldoc -g odoc_htmlcg.cmo $(INCLUDES) $(GELIB_CMIFILES:.cmi=.mli)
+	$(CP) camlget.png ocamldoc/
 
 dummy:
 

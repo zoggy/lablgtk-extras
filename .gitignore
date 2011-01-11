@@ -8,6 +8,7 @@ config.log
 config_check.log
 ocaml_config.sh
 config.status
+configure.lineno
 autom4te.cache
 src/version.ml
 src/install.ml
