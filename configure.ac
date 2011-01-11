@@ -90,7 +90,7 @@ if test "$bindir" = "\${exec_prefix}/bin" ; then
 fi
 
 if test "$libdir" = "\${exec_prefix}/lib" ; then
-        libdir=$OCAMLLIB/gtk-extras
+        libdir=$OCAMLLIB/lablgtk-extras
 fi
 
 if test "$mandir" = "\${prefix}/man" ; then
@@ -102,7 +102,7 @@ if test "$mandir" = "\${prefix}/man" ; then
 fi
 
 if test "$datadir" = "\${datarootdir}" ; then
-        datadir=${prefix}/share/gtk-extras
+        datadir=${prefix}/share/lablgtk-extras
 fi
 if test "$datadir" = "\${prefix}/share" ; then
         datadir=$prefix/share
@@ -117,8 +117,8 @@ COMPFLAGS=
 ################
 # tools names
 ################
-GELIB=gtk_extras.cmxa
-GELIB_BYTE=gtk_extras.cma
+GELIB=lablgtkextras.cmxa
+GELIB_BYTE=lablgtkextras.cma
 
 #############################
 # substitutions to perform

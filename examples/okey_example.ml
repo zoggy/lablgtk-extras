@@ -1,7 +1,7 @@
 (*********************************************************************************)
-(*                Cameleon                                                       *)
+(*                Lablgtk-extras                                                 *)
 (*                                                                               *)
-(*    Copyright (C) 2004-2010 Institut National de Recherche en Informatique     *)
+(*    Copyright (C) 2011 Institut National de Recherche en Informatique          *)
 (*    et en Automatique. All rights reserved.                                    *)
 (*                                                                               *)
 (*    This program is free software; you can redistribute it and/or modify       *)
@@ -21,12 +21,13 @@
 (*                                                                               *)
 (*    Contact: Maxence.Guesdon@inria.fr                                          *)
 (*                                                                               *)
+(*                                                                               *)
 (*********************************************************************************)
 
 (* $Id: okey_example.ml 749 2010-06-17 06:52:00Z zoggy $ *)
 
 (* Compile with
-  ocamlc -o okey_example.x -I +lablgtk2 -I +cameleon2 lablgtk.cma okey.cmo <this_file> *)
+  ocamlc -o okey_example.x -I +lablgtk2 -I +lablgtk-extras lablgtk.cma lablgtkextras.cma <this_file> *)
 
 let _ = GMain.Main.init ()
 let w = GWindow.window

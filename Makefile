@@ -64,6 +64,7 @@ configure: configure.ac
 HEADFILES= configure.ac configure \
 	master.Makefile.in Makefile \
 	src/*.ml src/*.mli src/*.in \
+	examples/*.ml \
 	src/Makefile checkocaml.ml
 headers: dummy
 	echo $(HEADFILES)
