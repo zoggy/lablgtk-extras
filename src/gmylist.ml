@@ -1,7 +1,7 @@
 (*********************************************************************************)
-(*                Cameleon                                                       *)
+(*                Lablgtk-extras                                                 *)
 (*                                                                               *)
-(*    Copyright (C) 2004-2010 Institut National de Recherche en Informatique     *)
+(*    Copyright (C) 2011 Institut National de Recherche en Informatique          *)
 (*    et en Automatique. All rights reserved.                                    *)
 (*                                                                               *)
 (*    This program is free software; you can redistribute it and/or modify       *)
@@ -20,6 +20,7 @@
 (*    02111-1307  USA                                                            *)
 (*                                                                               *)
 (*    Contact: Maxence.Guesdon@inria.fr                                          *)
+(*                                                                               *)
 (*                                                                               *)
 (*********************************************************************************)
 
