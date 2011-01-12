@@ -99,7 +99,7 @@ install: dummy
 # Distribution
 ###############
 archive: dummy
-	git archive --worktree-attributes --prefix=lablgtkextras-$(VERSION)/ HEAD | gzip > /tmp/lablgtkextras-$(VERSION).tar.gz
+	git archive --prefix=lablgtkextras-$(VERSION)/ HEAD | gzip > /tmp/lablgtkextras-$(VERSION).tar.gz
 
 ###########################
 # additional dependencies

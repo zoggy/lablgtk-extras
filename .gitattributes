@@ -1,4 +1,4 @@
-/web export-ignore=true
+/web export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
 
