@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<section>
+<p class="release">
+<en>Latest release is </en>
+<fr>La dernière version est </fr>
+<link href="http://download.gna.org/cameleon/cameleon_1.9.20.tar.gz">1.9.20</link> (2010-06-17).<br/>
+</p>
+<p>Changes:
+</p>
+<ul>
+<li>compatibility with OCaml 3.12.0,</li>
+<li>new commands in ocaml-mode, using information from <tt>.annot</tt> files:
+<ul><li><tt>ocaml_expand_ext_idents</tt>
+    which prompts the user to replace external identifiers
+    by their fully qualitied identifier (except for
+    Pervasives),
+    </li>
+    <li><tt>ocaml_copy_type_annot</tt>
+	  which acts like display type annot but also copy the
+	  type to the clipboard. This is useful to add a value
+	  in a .mli,
+	  </li>
+	  <li><tt>ocaml_show_stack_calls</tt>
+	  to show the non-tail calls in the current buffer.
+	  This command is a
+	  switch: first call turn if on, next one turn it off.
+	  It is bound by default to Ctrl-Alt c (CA-c),
+	  </li>
+	  <li><tt>ocaml_jump_to_local_def</tt> to jump to
+    the definition of an identifier of the current file,
+    </li>
+    <li><tt>ocaml_display_call_annot</tt> to display
+    whether a call is tail-recursive (tail) or not (stack).
+    </li>
+    </ul>
+</li>
+<li>fix: do not create an empty file when opening a yet
+	  non-existing file,</li>
+<li>fix: range selection in error-jumping,</li>
+<li>more functions exported in Ed_mode_ocaml,</li>
+<li>text outputs now use same style as other sourceviews,</li>
+<li>expansion in sourceviews now uses a regular expression
+	  defined in the current mode of the sourceview. Expansion
+	  of identifiers can now depend on the kind of file which is
+	  edited.</li>
+</ul>
+
+
+<p class="warning">
+<en> Do not hesitate to download the nightly snapshot of the subversion trunk,
+with more features and bug fixes:</en>
+<fr> N'hésitez pas à télécharger la dernière version du dépôt, dans une archive créée chaque
+nuit:</fr>
+<link href="http://download.gna.org/cameleon/cameleon_snapshot.tar.gz">Nightly snapshot</link>.
+</p>
+</section>
