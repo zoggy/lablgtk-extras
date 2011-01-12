@@ -83,12 +83,13 @@ $(CWLIB_BYTE): $(CWLIB_CMIFILES) $(CWLIB_CMOFILES)
 
 doc:
 	mkdir -p ocamldoc
-	ocamldoc -d ocamldoc -html $(INCLUDES) $(GELIB_CMIFILES:.cmi=.mli)
+	ocamldoc -sort -d ocamldoc -html $(INCLUDES) $(GELIB_CMIFILES:.cmi=.mli) \
+	$(CWLIB:.cmxa=.mli)
 
 camlget:
 	mkdir -p ocamldoc
 	ocamldoc -sort -d ocamldoc -g odoc_htmlcg.cmo $(INCLUDES) \
-	$(GELIB_CMIFILES:.cmi=.mli) $(CWLIB_CMIFILES:.cmi=.mli)
+	$(GELIB_CMIFILES:.cmi=.mli) $(CWLIB:.cmxa=.mli)
 	$(CP) camlget.png ocamldoc/
 
 dummy:
