@@ -27,10 +27,6 @@
 
 include master.Makefile
 
-SCRIPTS=
-
-IMAGES=
-
 # Compilation
 #############
 
@@ -99,6 +95,11 @@ dummy:
 
 install: dummy
 	cd src && $(MAKE) install
+
+# Distribution
+###############
+archive: dummy
+	git archive --worktree-attributes --prefix=lablgtkextras-$(VERSION)/ HEAD | gzip > /tmp/lablgtkextras-$(VERSION).tar.gz
 
 ###########################
 # additional dependencies

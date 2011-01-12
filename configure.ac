@@ -27,7 +27,7 @@
 # check for one particular file of the sources
 AC_INIT(master.Makefile.in)
 
-VERSION=0.1
+VERSION=1.0
 
 # The root directory where we will compile
 ROOT=`pwd`
