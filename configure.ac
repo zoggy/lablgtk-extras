@@ -115,10 +115,13 @@ fi
 COMPFLAGS=
 
 ################
-# tools names
+# tool and lib names
 ################
 GELIB=lablgtkextras.cmxa
 GELIB_BYTE=lablgtkextras.cma
+
+CWLIB=configwin.cmxa
+CWLIB_BYTE=configwin.cma
 
 #############################
 # substitutions to perform
@@ -146,6 +149,8 @@ AC_SUBST(LABLGLADECC)
 
 AC_SUBST(GELIB)
 AC_SUBST(GELIB_BYTE)
+AC_SUBST(CWLIB)
+AC_SUBST(CWLIB_BYTE)
 
 AC_SUBST(LABLGTK2_INCLUDES)
 

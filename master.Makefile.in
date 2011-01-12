@@ -62,6 +62,8 @@ DATADIR=$(DESDIT)@datadir@
 
 GELIB=@GELIB@
 GELIB_BYTE=@GELIB_BYTE@
+CWLIB=@CWLIB@
+CWLIB_BYTE=@CWLIB_BYTE@
 
 #shut up autconf @datarootdir@
 

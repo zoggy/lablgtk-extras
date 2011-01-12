@@ -49,19 +49,34 @@ GELIB_CMOFILES= \
 GELIB_CMXFILES=$(GELIB_CMOFILES:.cmo=.cmx)
 GELIB_CMIFILES=$(GELIB_CMOFILES:.cmo=.cmi)
 
-opt: $(GELIB)
-byte:  $(GELIB_BYTE)
+CWLIB_CMOFILES=configwin_keys.cmo \
+        configwin_types.cmo \
+        configwin_messages.cmo \
+        configwin_ihm.cmo \
+        configwin.cmo
+CWLIB_CMIFILES=$(CWLIB_CMOFILES:.cmo=.cmi)
+CWLIB_CMXFILES=$(CWLIB_CMOFILES:.cmo=.cmx)
+
 all: byte opt
+opt: $(GELIB) $(CWLIB)
+byte:  $(GELIB_BYTE) $(CWLIB_BYTE)
 
 TOOLS=
 TOOLS_BYTE=
 
-# Base
+# lablgtkextras
 $(GELIB): $(GELIB_CMIFILES) $(GELIB_CMXFILES)
 	$(OCAMLOPT) -a -o $@ $(GELIB_CMXFILES)
 
 $(GELIB_BYTE): $(GELIB_CMIFILES) $(GELIB_CMOFILES)
 	$(OCAMLC) -a -o $@ $(GELIB_CMOFILES)
+
+# configwin
+$(CWLIB): $(CWLIB_CMIFILES) $(CWLIB_CMXFILES)
+	$(OCAMLOPT) -a -o $@ $(CWLIB_CMXFILES)
+
+$(CWLIB_BYTE): $(CWLIB_CMIFILES) $(CWLIB_CMOFILES)
+	$(OCAMLC) -a -o $@ $(CWLIB_CMOFILES)
 
 #client: $(GELIB) client.ml
 #	$(OCAMLOPT) -o $@ $(INCLUDES) lablgtk.cmxa lablgnomecanvas.cmxa $^
@@ -72,14 +87,18 @@ doc:
 
 camlget:
 	mkdir -p ocamldoc
-	ocamldoc -sort -d ocamldoc -g odoc_htmlcg.cmo $(INCLUDES) $(GELIB_CMIFILES:.cmi=.mli)
+	ocamldoc -sort -d ocamldoc -g odoc_htmlcg.cmo $(INCLUDES) \
+	$(GELIB_CMIFILES:.cmi=.mli) $(CWLIB_CMIFILES:.cmi=.mli)
 	$(CP) camlget.png ocamldoc/
 
 dummy:
 
 install:
 	$(MKDIR) $(BINDIR) $(LIBDIR) $(DATADIR)
-	$(CP) $(GELIB) $(GELIB_BYTE) $(GELIB_CMIFILES) $(LIBDIR)/
+	$(CP) $(GELIB) $(GELIB_BYTE) $(GELIB:.cmxa=.a) $(GELIB_CMIFILES) \
+	$(GELIB_CMOFILES) $(GELIB_CMXFILES) \
+	$(GELIB_CMXFILES:.cmx=.o) $(GELIB_CMIFILES:.cmi=.mli) $(LIBDIR)/
+	$(CP) $(CWLIB) $(CWLIB_BYTE) $(CWLIB:.cmxa=.a) $(CWLIB:.cmxa=.cmi) $(CWLIB:.cmxa=.mli) $(LIBDIR)/
 
 #	$(CP) gtk/ge.glade $(DATADIR)/
 #	$(CP) $(TOOLS) $(TOOLS_BYTE) $(BINDIR)/

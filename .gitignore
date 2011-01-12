@@ -13,4 +13,4 @@ autom4te.cache
 src/version.ml
 src/install.ml
 src/ocamldoc
-examples/okey_example.x
+examples/*.x
