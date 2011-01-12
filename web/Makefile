@@ -9,6 +9,7 @@ RSS2CONTENT=/opt/godi/bin/cduce -I /opt/mysite --run rss.cdo --arg
 #DEST_DIR=site/
 #WWW_CVS=/work/devel/all-cameleon2/website/
 DEST_DIR=$(ROOT)/web/website
+REMOTE_DEST=zoggy@gtk-extras.forge.ocamlcore.org:/var/lib/gforge/chroot/home/groups/gtk-extras/htdocs/
 
 XML_FILES=\
 	about.xml \
@@ -26,10 +27,11 @@ all: $(XML_FILES)
 	cp top.jpg bottom.jpg $(DEST_DIR)
 	(cd $(ROOT)/src && $(MAKE) camlget && $(CP) -r ocamldoc $(DEST_DIR)/)
 	$(CP) $(DEST_DIR)/index.en.html $(DEST_DIR)/index.html
+	$(CP) -r img $(DEST_DIR)
 	rpl "&amp;&amp;" "&&" $(DEST_DIR)/*.html
 
-installsite:site
-#	$(CP) -r $(DEST_DIR)* $(WWW_CVS)
+installsite:all
+	scp -r $(DEST_DIR)* $(REMOTE_DEST)
 #	$(CP) $(DEST_DIR)index.en.html $(WWW_CVS)index.html
 #	(cd $(WWW_CVS) && touch img/* && svn commit -m-)
 #	$(CP) /work/devel/www-cameleon2/* ~/public_html/tmp_cameleon2/

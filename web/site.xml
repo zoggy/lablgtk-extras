@@ -34,7 +34,7 @@ des application en OCaml avec la bibliothèque LablGtk2.
 </section>
 
 <section name="news">
-<title><en>News</en><fr>Nouvelles</fr></title>
+<title><en>News</en><fr>Actualités</fr></title>
 <p>
 <b>2011-01-12:</b>
 <en> Lablgtk-extras is created, by extracting reusable LablGtk2 convenient modules from Cameleon2.</en>
@@ -70,7 +70,7 @@ des application avec LablGtk2.</fr>
 <en>a module to add handlers for key press events,</en>
 <fr>un module pour ajouter des gestionnaires d'événéments de type "pression de touche",</fr>
 </li>
-<li><a href="refdoc/Gtksv_utils.html">Gtksv_utils</a>:
+<li><a href="ocamldoc/Gtksv_utils.html">Gtksv_utils</a>:
 <en>a module to share configuration of colors, fonts, ..., between applications using LablGtkSourceView,
 with functions and boxes to make the user edit configuration of languages and source views.</en>
 <fr>un module pour partager la configuration des couleurs, fontes, ..., entre applications utilisant
@@ -89,6 +89,15 @@ configurer les langages et les "source views".</fr>
 </p>
 </section>
 
+<section name="license">
+<title><en>License</en><fr>Licence</fr></title>
+<en>Lablgtk-extras is distributed under the </en>
+<fr>Lablgtk-extras est distribué sous la licence </fr>
+<link href="http://www.gnu.org/licenses/lgpl.html">LGPL version 2 or later"</link><fr>.</fr>
+<en> license.</en>
+
+
+</section>
 <section name="authors">
 <title><en>Author</en><fr>Auteur</fr></title>
 <p>

@@ -2,7 +2,7 @@
 <side>
 <section><page-toc><en>On this page:</en><fr>Sur cette page:</fr></page-toc></section>
 <section>
-<xhtml><img src="img/home.png" alt=""/></xhtml><local href="index">Cameleon2</local><br/>
+<xhtml><img src="img/home.png" alt=""/></xhtml><local href="index"><en>Home</en><fr>Accueil</fr></local><br/>
 <xhtml><img src="img/news.png" alt=""/></xhtml><local href="news"><en>News</en><fr>Actualités</fr></local><br/>
 <xhtml><img src="img/download.png" alt=""/></xhtml><local href="downloads"><en>Downloads</en><fr>Télécharger</fr></local><br/>
 <xhtml><img src="img/doc.png" alt=""/></xhtml><local href="doc">Documentation</local><br/>

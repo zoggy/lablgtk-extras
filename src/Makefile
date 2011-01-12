@@ -82,15 +82,21 @@ $(CWLIB_BYTE): $(CWLIB_CMIFILES) $(CWLIB_CMOFILES)
 #	$(OCAMLOPT) -o $@ $(INCLUDES) lablgtk.cmxa lablgnomecanvas.cmxa $^
 
 doc:
+	$(RM) ocamldoc
 	mkdir -p ocamldoc
-	ocamldoc -sort -d ocamldoc -html $(INCLUDES) $(GELIB_CMIFILES:.cmi=.mli) \
+	ocamldoc -sort -d ocamldoc -html  -t "Lablgtk-extras" \
+	$(INCLUDES) $(GELIB_CMIFILES:.cmi=.mli) \
 	$(CWLIB:.cmxa=.mli)
+#	$(CP) ocamldoc_style.css ocamldoc/style.css
 
 camlget:
+	$(RM) ocamldoc
 	mkdir -p ocamldoc
-	ocamldoc -sort -d ocamldoc -g odoc_htmlcg.cmo $(INCLUDES) \
+	ocamldoc -sort -d ocamldoc -t "Lablgtk-extras" \
+	-g odoc_htmlcg.cmo $(INCLUDES) \
 	$(GELIB_CMIFILES:.cmi=.mli) $(CWLIB:.cmxa=.mli)
 	$(CP) camlget.png ocamldoc/
+#	$(CP) ocamldoc_style.css ocamldoc/style.css
 
 dummy:
 
