@@ -1,7 +1,8 @@
 body {
 /*  font-family:"Trebuchet MS", Arial, Verdana;*/
   font-size:0.90em;
-  background: url(top.jpg) no-repeat top left ;
+  /*background: url(top.jpg) no-repeat top left ;*/
+  /*background: url(back.jpg) ;*/
   font-family: sans-serif;
   /*background: url(bg2.jpg) no-repeat top left;*/
   /* background: url(bottom.jpg) no-repeat bottom right;*/
@@ -9,12 +10,12 @@ body {
 
 a:link {
   text-decoration: none ;
-  color: #0080c0;
+  color: #c0003f;
 }
 
 a:visited {
   text-decoration: none ;
-  color: #005080 ;
+  color: #d85080 ;
 }
 
 p {
@@ -72,7 +73,7 @@ div#sidebar {
         margin-left: 3px;
         padding: 4px;
         border-style: dashed ;
-        border-color: #0080c0;
+        border-color: #c0003f;
         border-width: 1px;
         padding-top: 8px ;
         padding-bottom: 8px;
@@ -86,7 +87,7 @@ div#sidebar ul { padding-left: 1em; }
 div#page-title {
   padding-top: 10px;
   font-size: 30px;
-  color: #384498;
+  color: #aa184b;
   text-align: center ;
   width: 100% ;
 }
@@ -140,11 +141,11 @@ div.section2 {
 }
 
 div.section2-title {
-  color: #384498;
+  color: #aa184b;
   font-size: 130%;
   margin-bottom: 5px;
   border-style: dashed ;
-  border-color: #384498;
+  border-color: #aa184b;
   border-width: 0px 0px 1px 0px;
   width: 100%;
 }
@@ -153,7 +154,7 @@ div.section2 {
   border-width: 2px;
   border-color: #3465ce;
   border-style: solid ;
-  background-color: #DDDDDD;
+  background-color: #EFEFaF;
   color: black ;
 }
 div.section2-title {
@@ -165,17 +166,17 @@ div.section2-title {
 }
 */
 div#sidebar div.section2 {
-        background-color: #EFEFFF;
+        background-color: #EFEFaF;
         color: black;
         font-size: smaller ;
         margin-left: 3px;
         padding: 4px;
         border-style: dashed ;
         border-width: 1px;
-        border-color: #384498;
+        border-color: #aa184b;
 /*
         border-style: dashed ;
-        border-color: #0080c0;
+        border-color: #c0003f;
         border-width: 1px;
 */
         padding-top: 5px ;
@@ -187,7 +188,7 @@ div.section3 {
 }
 div.section3-title {
   margin-top: 8px;
-  color: #384498;
+  color: #aa184b;
   font-size: 110%;
 }
 div.section4 {
@@ -195,7 +196,7 @@ div.section4 {
   margin-bottom: 1em;
 }
 div.section4-title {
-  color: #384498;
+  color: #aa184b;
   font-size: 100%;
   margin-bottom: 0px;
   width: 100%;
@@ -205,7 +206,7 @@ div.footnote { font-size: smaller ; }
 div.linkline {
   margin-top: 5px;
   padding-top: 0px;
-  background-color: #EFEFEF;
+  background-color: #EFEFaF;
   width: 100%;
 }
 
@@ -217,7 +218,7 @@ p.remark {
  padding: 3px;
  margin-top: 5px;
  margin-bottom: 5px ;
- border: 1px #0080c0 dashed;
+ border: 1px #c0003f dashed;
  background-color: #DDDDFF ;
 }
 
@@ -225,7 +226,7 @@ p.release { padding-top: 0px; margin-top: 0px; padding-right: 1em;}
 
 div.qa { padding-top : 1em ; }
 div.question {
-  color: #384498;
+  color: #aa184b;
   font-size: 100%;
   text-decoration: underline;
   margin-bottom: 5px;
@@ -237,7 +238,7 @@ div.answer {
   padding-left: 5px;
   border-style: solid ;
   border-width: 0 0 0 2px;
-  border-color: #384498;
+  border-color: #aa184b;
 }
 div.answer p { margin-top: 8px }
 

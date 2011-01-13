@@ -24,11 +24,11 @@ all: $(XML_FILES)
 	$(MYSITE) site.xml -lang fr -o $(DEST_DIR)
 	$(MYSITE) site.xml -lang en -o $(DEST_DIR)
 	cp style.css $(DEST_DIR)
-	cp top.jpg bottom.jpg $(DEST_DIR)
 	(cd $(ROOT)/src && $(MAKE) camlget && $(CP) -r ocamldoc $(DEST_DIR)/)
 	$(CP) $(DEST_DIR)/index.en.html $(DEST_DIR)/index.html
 	$(CP) -r img $(DEST_DIR)
 	rpl "&amp;&amp;" "&&" $(DEST_DIR)/*.html
+#	cp back.jpg top.jpg bottom.jpg $(DEST_DIR)
 
 installsite:all
 	scp -r $(DEST_DIR)/* $(REMOTE_DEST)
