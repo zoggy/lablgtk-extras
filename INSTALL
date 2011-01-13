@@ -3,7 +3,8 @@
 *** What you need ***
 - OCaml 3.12.0 or above installed
 - LablGtk 2.14.0 or above installed (with lablglade and lablgtksourceview2 enabled)
-- Config_file installed
+- Config_file 1.0 or above installed
+- Xml-light 2 or above installed
 - make ;-)
 
 *** How to compile ***
