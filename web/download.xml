@@ -39,7 +39,7 @@
 <en> or above installed (with lablglade and lablgtksourceview2 enabled)</en><fr> ou supérieur installé (avec lablglade et lablgtksourceview2 activés)</fr></li>
 <li><link href="">Config_file 1.0</link>
 <en> or above installed</en><fr> ou supérieur installé</fr></li>
-<li><link href="http://tech.motion-twin.com/xmllight.html">XML-light 2</link>
+<li><link href="http://tech.motion-twin.com/xmllight.html">XML-light 2.2</link>
 <en> or above installed</en><fr> ou supérieur installé</fr></li>
 </ul>
 <tt>make</tt>
