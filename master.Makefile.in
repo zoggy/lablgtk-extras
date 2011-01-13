@@ -99,7 +99,7 @@ first:
 	$(OCAMLC) $(OCAMLPP) $(COMPFLAGS) -c $<
 
 %.cmx %.o:%.ml
-	$(OCAMLOPT) $(OCAMLPP) $(COMPFLAGS) -for-pack Hypomnemata -c $<
+	$(OCAMLOPT) $(OCAMLPP) $(COMPFLAGS) -c $<
 
 %.o: %.c
 	$(OCAMLOPT) $(COMPFLAGS) -c $< && $(MV) `basename $@` `dirname $@`
