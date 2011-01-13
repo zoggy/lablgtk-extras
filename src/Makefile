@@ -86,7 +86,7 @@ doc:
 	mkdir -p ocamldoc
 	ocamldoc -sort -d ocamldoc -html  -t "Lablgtk-extras" \
 	$(INCLUDES) $(GELIB_CMIFILES:.cmi=.mli) \
-	$(CWLIB:.cmxa=.mli)
+	$(CWLIB:.cmxa=.mli) configwin_keys.ml
 #	$(CP) ocamldoc_style.css ocamldoc/style.css
 
 camlget:
@@ -94,7 +94,7 @@ camlget:
 	mkdir -p ocamldoc
 	ocamldoc -sort -d ocamldoc -t "Lablgtk-extras" \
 	-g odoc_htmlcg.cmo $(INCLUDES) \
-	$(GELIB_CMIFILES:.cmi=.mli) $(CWLIB:.cmxa=.mli)
+	$(GELIB_CMIFILES:.cmi=.mli) $(CWLIB:.cmxa=.mli) configwin_keys.ml
 	$(CP) camlget.png ocamldoc/
 #	$(CP) ocamldoc_style.css ocamldoc/style.css
 
