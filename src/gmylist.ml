@@ -300,8 +300,9 @@ class virtual ['a] plist
 	     let sel = view#selection in
 	     match sel#get_selected_rows with
 	       [] ->
+		 let sel = selection in
 		 selection <- [];
-		 List.iter self#on_deselect selection
+		 List.iter self#on_deselect sel
 
 	     | l ->
 		 let l = List.map
