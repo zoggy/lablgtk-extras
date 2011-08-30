@@ -153,6 +153,7 @@ AC_SUBST(CWLIB)
 AC_SUBST(CWLIB_BYTE)
 
 AC_SUBST(LABLGTK2_INCLUDES)
+AC_SUBST(XMLLIGHT_INCLUDES)
 
 # Finally create the master.Makefile.in and other files
 ACFILES="master.Makefile src/version.ml src/install.ml"
