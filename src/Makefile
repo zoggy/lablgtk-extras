@@ -26,16 +26,13 @@
 
 include ../master.Makefile
 
-PACKAGES=config-file
+PACKAGES=config-file,lablgtk2.sourceview2
 OF_FLAGS= -package $(PACKAGES)
 
 MY_INCLUDES=
-SYSTEM_INCLUDES= $(LABLGTK2_INCLUDES) $(XMLLIGHT_INCLUDES)
+SYSTEM_INCLUDES= $(XMLLIGHT_INCLUDES)
 
 INCLUDES=$(MY_INCLUDES) $(SYSTEM_INCLUDES)
-
-LIBS=lablgtk.cmxa lablglade.cmxa
-LIBS_BYTE=$(LIBS:.cmxa=.cma)
 
 COMPFLAGS=$(INCLUDES) -annot -g -warn-error A
 

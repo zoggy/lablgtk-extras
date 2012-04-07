@@ -809,32 +809,64 @@ let add_conf_variables c =
 
 (*/c==m=[OCaml_conf]=0.3=t==*)
 
-(*c==v=[OCaml_conf.detect_lablgtk2]=0.1====*)
-let detect_lablgtk2 ?(modes=[`Byte;`Opt]) conf =
-  let includes = ["default install", ["+lablgtk2"]] in
-  let includes =
-    match ocamlfind_query conf "lablgtk2" with
-      None -> includes
-    | Some s -> ("with ocamlfind", [s]) :: includes
+let ocamlfind_query_version conf package =
+  match conf.ocamlfind with
+    "" -> None
+  | _ ->
+      try
+        match exec_and_get_first_line conf.ocamlfind
+          [| "query" ; "-format" ; "%v" ; package |]
+        with
+          "" -> None
+        | s -> Some s
+      with
+        _ -> None
+;;
+
+let check_ocamlfind_package ?min_version ?max_version ?not_found conf name =
+  !print (Printf.sprintf "checking for %s... " name);
+  let not_found =
+    match not_found with
+      None ->
+        begin
+        function
+          | `Package_not_installed pkg ->
+              !fatal_error (Printf.sprintf "Package %s not found" pkg)
+          | `Package_bad_version version ->
+              !fatal_error
+              (Printf.sprintf "Package %s found with version %s, but wanted %s%s%s"
+               name version
+               (match min_version with
+                  None -> ""
+                | Some v -> Printf.sprintf ">= %s" (string_of_version v)
+               )
+               (match min_version, max_version with
+                 Some _, Some _ -> " and "
+                | _ -> ""
+               )
+               (match max_version with
+                  None -> ""
+                | Some v -> Printf.sprintf "<= %s" (string_of_version v)
+               )
+              )
+        end
+    | Some f -> f
   in
-  let libs = ["lablgtk.cma"] in
-  let f (mes, includes) mode =
-    let mes = Printf.sprintf "checking for Lablgtk2 (%s) %s... "
-        (string_of_mode mode) mes
-    in
-    can_link ~mes mode conf ~includes ~libs []
-  in
-  let rec iter = function
-      [] -> ("", [])
-    | incs :: q ->
-        let f = f incs in
-        if List.for_all f modes then
-          (string_of_includes (snd incs), libs)
-        else
-          iter q
-  in
-  iter includes
-(*/c==v=[OCaml_conf.detect_lablgtk2]=0.1====*)
+   match ocamlfind_query conf name with
+      None -> not_found (`Package_not_installed name)
+    | Some s ->
+      match ocamlfind_query_version conf name with
+        None -> not_found (`Package_bad_version "<no version>")
+      | Some s ->
+          let version = version_of_string s in
+          let min = match min_version with None -> [] | Some v -> v in
+          let max = match max_version with None -> [max_int] | Some v -> v in
+          if version < min or version > max then
+            not_found (`Package_bad_version s)
+          else
+            !print "ok\n"
+;;
+
 
 (*c==v=[OCaml_conf.detect_xml_light]=0.3====*)
 let detect_xml_light ?(modes=[`Byte;`Opt]) conf =
@@ -867,14 +899,7 @@ let detect_xml_light ?(modes=[`Byte;`Opt]) conf =
   iter includes
 (*/c==v=[OCaml_conf.detect_xml_light]=0.3====*)
 
-let check_config_file ?(modes=[`Byte;`Opt]) conf =
-  !print "checking for config-file... ";
-  match ocamlfind_query conf "config-file" with
-    None -> !fatal_error "Config-file package is not installed"
-  | Some _ -> !print "ok\n"
-;;
-
-let ocaml_required = [3;11]
+let ocaml_required = [3;11];;
 
 let conf = ocaml_conf ();;
 print_conf conf;;
@@ -890,8 +915,10 @@ let _ =
 
 let _ = !print "\n### checking required tools and libraries ###\n"
 
-let _ = add_conf_variables conf;;
+let () = check_ocamlfind_package conf "config-file";;
+let () = check_ocamlfind_package conf "lablgtk2.sourceview2";;
 
+let _ = add_conf_variables conf;;
 
 let _ =
   match detect_xml_light ~modes conf with
@@ -899,24 +926,6 @@ let _ =
   | l, _ -> add_subst "XMLLIGHT_INCLUDES" (string_of_includes l)
 ;;
 
-
-let _ =
-  match detect_lablgtk2 ~modes conf with
-    "", [] -> ()
-  | s, _ -> add_subst "LABLGTK2_INCLUDES" s
-;;
-let _ =
-  let lablgladecc =
-    try ocaml_prog "lablgladecc2"
-    with Program_not_found _ ->
-      try ocaml_prog "lablgladecc"
-      with Program_not_found _ ->
-        prerr_endline "Cannot find lablgladecc2 or lablgladecc";
-        exit 1
-  in
-  add_subst "LABLGLADECC" lablgladecc
-
-let () = check_config_file conf;;
 
 let _ = !print "\n###\n"
 

@@ -565,12 +565,10 @@ ac_unique_file="master.Makefile.in"
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
 XMLLIGHT_INCLUDES
-LABLGTK2_INCLUDES
 CWLIB_BYTE
 CWLIB
 GELIB_BYTE
 GELIB
-LABLGLADECC
 OCAMLFIND
 OCAMLBUILD
 ROOT
@@ -1845,8 +1843,6 @@ CWLIB_BYTE=configwin.cma
 
 #############################
 # substitutions to perform
-
-
 
 
 
