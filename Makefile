@@ -96,6 +96,9 @@ dummy:
 install: dummy
 	cd src && $(MAKE) install
 
+uninstall: dummy
+	cd src && $(MAKE) uninstall
+
 # Distribution
 ###############
 archive: dummy

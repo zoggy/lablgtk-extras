@@ -867,34 +867,15 @@ let detect_xml_light ?(modes=[`Byte;`Opt]) conf =
   iter includes
 (*/c==v=[OCaml_conf.detect_xml_light]=0.3====*)
 
-let detect_cairo ?(modes=[`Byte;`Opt]) conf =
-  let includes = ["default install", ["+cairo"]] in
-  let includes =
-    match ocamlfind_query conf "cairo" with
-      None -> includes
-    | Some s -> ("with ocamlfind", [s]) :: includes
-  in
-  let libs = ["bigarray.cma"; "cairo.cma"] in
-  let f (mes, includes) mode =
-    let mes = Printf.sprintf "checking for cairo (%s) %s... "
-        (string_of_mode mode) mes
-    in
-    can_link ~mes mode conf ~includes ~libs []
-  in
-  let rec iter = function
-      [] -> ("", [])
-    | incs :: q ->
-        let f = f incs in
-        if List.for_all f modes then
-          (string_of_includes (snd incs), libs)
-        else
-          iter q
-  in
-  iter includes
+let check_config_file ?(modes=[`Byte;`Opt]) conf =
+  !print "checking for config-file... ";
+  match ocamlfind_query conf "config-file" with
+    None -> !fatal_error "Config-file package is not installed"
+  | Some _ -> !print "ok\n"
 ;;
 
 let ocaml_required = [3;11]
-let cameleon_required = [1;9;19]
+
 let conf = ocaml_conf ();;
 print_conf conf;;
 
@@ -911,13 +892,6 @@ let _ = !print "\n### checking required tools and libraries ###\n"
 
 let _ = add_conf_variables conf;;
 
-let ocamlbuild =
-  try ocaml_prog ~err: true "ocamlbuild"
-  with Program_not_found _ ->
-      !fatal_error "ocamlbuild not found.";
-      assert false
-;;
-add_subst "OCAMLBUILD" ocamlbuild ;;
 
 let _ =
   match detect_xml_light ~modes conf with
@@ -941,6 +915,8 @@ let _ =
         exit 1
   in
   add_subst "LABLGLADECC" lablgladecc
+
+let () = check_config_file conf;;
 
 let _ = !print "\n###\n"
 

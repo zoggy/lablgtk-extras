@@ -38,7 +38,7 @@ OCAMLMKLIB = @OCAMLMKLIB@
 CAMMKTOP = @CAMMKTOP@
 OCAMLDOCDIR= $(OCAMLLIB)/ocamldoc
 OCAMLVERSION = @OCAMLVERSION@
-OCAMLBUILD= @OCAMLBUILD@
+OCAMLFIND= @OCAMLFIND@
 OCAMLDOC= @OCAMLDOC@
 OCAMLDOCOPT= @OCAMLDOC_OPT@
 OCAMLPP=
@@ -53,13 +53,6 @@ CP=cp -f
 CPDIR=$(CP) -r
 RM=rm -fR
 MV=mv
-
-DESTDIR=   # For debian packagers
-
-LIBDIR=$(DESTDIR)@libdir@
-BINDIR=$(DESTDIR)@bindir@
-MANDIR=$(DESTDIR)@mandir@
-DATADIR=$(DESDIT)@datadir@
 
 GELIB=@GELIB@
 GELIB_BYTE=@GELIB_BYTE@
@@ -87,23 +80,23 @@ first:
 	.html .tex .dvi .ps .pdf
 
 %.cmi:%.mli
-	$(OCAMLC) $(OCAMLPP) $(COMPFLAGS) -c $<
+	$(OCAMLFIND) ocamlc $(OF_FLAGS) $(OCAMLPP) $(COMPFLAGS) -c $<
 
 %.cmo:%.ml
 	if test -f `dirname $<`/`basename $< .ml`.mli && test ! -f `dirname $<`/`basename $< .ml`.cmi ; then \
-	$(OCAMLC) $(OCAMLPP) $(COMPFLAGS) -c `dirname $<`/`basename $< .ml`.mli; fi
-	$(OCAMLC) $(OCAMLPP) $(COMPFLAGS) -c $<
+	$(OCAMLFIND) ocamlc $(OF_FLAGS) $(OCAMLPP) $(COMPFLAGS) -c `dirname $<`/`basename $< .ml`.mli; fi
+	$(OCAMLFIND) ocamlc $(OF_FLAGS) $(OCAMLPP) $(COMPFLAGS) -c $<
 
 %.cmi %.cmo:%.ml
 	if test -f `dirname $<`/`basename $< .ml`.mli && test ! -f `dirname $<`/`basename $< .ml`.cmi ; then \
-	$(OCAMLC) $(OCAMLPP) $(COMPFLAGS) -c `dirname $<`/`basename $< .ml`.mli; fi
-	$(OCAMLC) $(OCAMLPP) $(COMPFLAGS) -c $<
+	$(OCAMLFIND) ocamlc $(OF_FLAGS) $(OCAMLPP) $(COMPFLAGS) -c `dirname $<`/`basename $< .ml`.mli; fi
+	$(OCAMLFIND) ocamlc $(OF_FLAGS) $(OCAMLPP) $(COMPFLAGS) -c $<
 
 %.cmx %.o:%.ml
-	$(OCAMLOPT) $(OCAMLPP) $(COMPFLAGS) -c $<
+	$(OCAMLFIND) ocamlopt $(OF_FLAGS) $(OCAMLPP) $(COMPFLAGS) -c $<
 
 %.o: %.c
-	$(OCAMLOPT) $(COMPFLAGS) -c $< && $(MV) `basename $@` `dirname $@`
+	$(OCAMLFIND) ocamlopt $(OF_FLAGS) $(COMPFLAGS) -c $< && $(MV) `basename $@` `dirname $@`
 
 %.ml:%.mll
 	$(OCAMLLEX) $<

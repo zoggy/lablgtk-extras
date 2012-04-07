@@ -27,7 +27,7 @@
 # check for one particular file of the sources
 AC_INIT(master.Makefile.in)
 
-VERSION=1.0
+VERSION=1.1
 
 # The root directory where we will compile
 ROOT=`pwd`
@@ -85,29 +85,6 @@ AC_PREFIX_PROGRAM(`basename $OCAML`)
 exec_prefix=$prefix
 
 
-if test "$bindir" = "\${exec_prefix}/bin" ; then
-        bindir=$prefix/bin
-fi
-
-if test "$libdir" = "\${exec_prefix}/lib" ; then
-        libdir=$OCAMLLIB/lablgtk-extras
-fi
-
-if test "$mandir" = "\${prefix}/man" ; then
-        mandir=$prefix/man
-fi
-
-if test "$mandir" = "\${prefix}/man" ; then
-        mandir=$prefix/man
-fi
-
-if test "$datadir" = "\${datarootdir}" ; then
-        datadir=${prefix}/share/lablgtk-extras
-fi
-if test "$datadir" = "\${prefix}/share" ; then
-        datadir=$prefix/share
-fi
-
 
 ############################
 # Flags
@@ -145,6 +122,7 @@ AC_SUBST(EXEC_PREFIX)
 AC_SUBST(INSTALLBIN)
 AC_SUBST(ROOT)
 AC_SUBST(OCAMLBUILD)
+AC_SUBST(OCAMLFIND)
 AC_SUBST(LABLGLADECC)
 
 AC_SUBST(GELIB)
@@ -166,8 +144,6 @@ chmod a-w src/version.ml src/install.ml master.Makefile
 echo "
 ### Results of configuration ###
 
-Binaries will be installed in $bindir
-Libraries will be installed in $libdir
-Data will be installed in $datadir
+Libraries will be installed with findlib (package lablgtk-extras)
 
 "

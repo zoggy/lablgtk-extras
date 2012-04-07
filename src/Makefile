@@ -26,6 +26,9 @@
 
 include ../master.Makefile
 
+PACKAGES=config-file
+OF_FLAGS= -package $(PACKAGES)
+
 MY_INCLUDES=
 SYSTEM_INCLUDES= $(LABLGTK2_INCLUDES) $(XMLLIGHT_INCLUDES)
 
@@ -66,17 +69,17 @@ TOOLS_BYTE=
 
 # lablgtkextras
 $(GELIB): $(GELIB_CMIFILES) $(GELIB_CMXFILES)
-	$(OCAMLOPT) -a -o $@ $(GELIB_CMXFILES)
+	$(OCAMLFIND) ocamlopt $(OF_FLAGS) -a -o $@ $(GELIB_CMXFILES)
 
 $(GELIB_BYTE): $(GELIB_CMIFILES) $(GELIB_CMOFILES)
-	$(OCAMLC) -a -o $@ $(GELIB_CMOFILES)
+	$(OCAMLFIND) ocamlc $(OF_FLAGS) -a -o $@ $(GELIB_CMOFILES)
 
 # configwin
 $(CWLIB): $(CWLIB_CMIFILES) $(CWLIB_CMXFILES)
-	$(OCAMLOPT) -a -o $@ $(CWLIB_CMXFILES)
+	$(OCAMLFIND) ocamlopt $(OF_FLAGS) -a -o $@ $(CWLIB_CMXFILES)
 
 $(CWLIB_BYTE): $(CWLIB_CMIFILES) $(CWLIB_CMOFILES)
-	$(OCAMLC) -a -o $@ $(CWLIB_CMOFILES)
+	$(OCAMLFIND) ocamlc $(OF_FLAGS) -a -o $@ $(CWLIB_CMOFILES)
 
 #client: $(GELIB) client.ml
 #	$(OCAMLOPT) -o $@ $(INCLUDES) lablgtk.cmxa lablgnomecanvas.cmxa $^
@@ -84,7 +87,7 @@ $(CWLIB_BYTE): $(CWLIB_CMIFILES) $(CWLIB_CMOFILES)
 doc:
 	$(RM) ocamldoc
 	mkdir -p ocamldoc
-	ocamldoc -sort -d ocamldoc -html  -t "Lablgtk-extras" \
+	$(OCAMLFIND) ocamldoc $(OF_FLAGS) -sort -d ocamldoc -html  -t "Lablgtk-extras" \
 	$(INCLUDES) $(GELIB_CMIFILES:.cmi=.mli) \
 	$(CWLIB:.cmxa=.mli) configwin_keys.ml
 #	$(CP) ocamldoc_style.css ocamldoc/style.css
@@ -92,7 +95,7 @@ doc:
 camlget:
 	$(RM) ocamldoc
 	mkdir -p ocamldoc
-	ocamldoc -sort -d ocamldoc -t "Lablgtk-extras" \
+	$(OCAMLFIND) ocamldoc $(OF_FLAGS) -sort -d ocamldoc -t "Lablgtk-extras" \
 	-g odoc_htmlcg.cmo $(INCLUDES) \
 	$(GELIB_CMIFILES:.cmi=.mli) $(CWLIB:.cmxa=.mli) configwin_keys.ml
 	$(CP) camlget.png ocamldoc/
@@ -101,17 +104,14 @@ camlget:
 dummy:
 
 install:
-	$(MKDIR) $(BINDIR) $(LIBDIR) $(DATADIR)
-	$(CP) $(GELIB) $(GELIB_BYTE) $(GELIB:.cmxa=.a) $(GELIB_CMIFILES) \
-	$(GELIB_CMOFILES) $(GELIB_CMXFILES) \
-	$(GELIB_CMXFILES:.cmx=.o) $(GELIB_CMIFILES:.cmi=.mli) $(LIBDIR)/
-	$(CP) $(CWLIB) $(CWLIB_BYTE) $(CWLIB:.cmxa=.a) $(CWLIB:.cmxa=.cmi) $(CWLIB:.cmxa=.mli) $(LIBDIR)/
+	@$(OCAMLFIND) install lablgtk2-extras META \
+	  $(GELIB) $(GELIB_BYTE) $(GELIB:.cmxa=.a) $(GELIB_CMIFILES) \
+	  $(GELIB_CMOFILES) $(GELIB_CMXFILES) \
+	  $(GELIB_CMXFILES:.cmx=.o) $(GELIB_CMIFILES:.cmi=.mli) \
+	  $(CWLIB) $(CWLIB_BYTE) $(CWLIB:.cmxa=.a) $(CWLIB:.cmxa=.cmi) $(CWLIB:.cmxa=.mli)
 
-#	$(CP) gtk/ge.glade $(DATADIR)/
-#	$(CP) $(TOOLS) $(TOOLS_BYTE) $(BINDIR)/
-
-#	$(GELIB_BYTE:.cma=.cmi) $(GELIB_BYTE:.cma=.mli)
-
+uninstall:
+	@$(OCAMLFIND) remove lablgtk2-extras
 
 # Clean :
 #########

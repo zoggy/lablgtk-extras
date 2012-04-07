@@ -1,0 +1,13 @@
+description = "Additional libraries for Lablgtk2"
+requires = "lablgtk2 config-file lablgtk2.sourceview2"
+version = "1.1"
+
+archive(byte) = "lablgtkextras.cma"
+archive(native) = "lablgtkextras.cmxa"
+
+package "configwin" (
+  description = "Easy build of configuration window with GTK"
+  requires = "lablgtk2-extras"
+  archive(byte) = "configwin.cma"
+  archive(native) = "configwin.cmxa"
+)
