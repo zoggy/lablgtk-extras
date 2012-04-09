@@ -96,14 +96,14 @@ camlget:
 dummy:
 
 install:
-	@$(OCAMLFIND) install lablgtk2-extras META \
+	@$(OCAMLFIND) install $(PACKAGE_NAME) META \
 	  $(GELIB) $(GELIB_BYTE) $(GELIB:.cmxa=.a) $(GELIB_CMIFILES) \
 	  $(GELIB_CMOFILES) $(GELIB_CMXFILES) \
 	  $(GELIB_CMXFILES:.cmx=.o) $(GELIB_CMIFILES:.cmi=.mli) \
 	  $(CWLIB) $(CWLIB_BYTE) $(CWLIB:.cmxa=.a) $(CWLIB:.cmxa=.cmi) $(CWLIB:.cmxa=.mli)
 
 uninstall:
-	@$(OCAMLFIND) remove lablgtk2-extras
+	@$(OCAMLFIND) remove $(PACKAGE_NAME)
 
 # Clean :
 #########

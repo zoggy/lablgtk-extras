@@ -28,6 +28,7 @@
 AC_INIT(master.Makefile.in)
 
 VERSION=1.1
+PACKAGE_NAME=lablgtk2-extras
 
 # The root directory where we will compile
 ROOT=`pwd`
@@ -142,6 +143,6 @@ chmod a-w src/version.ml src/install.ml master.Makefile
 echo "
 ### Results of configuration ###
 
-Libraries will be installed with findlib (package lablgtk-extras)
+Libraries will be installed with findlib (package ${PACKAGE_NAME})
 
 "
