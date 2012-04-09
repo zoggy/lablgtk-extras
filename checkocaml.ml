@@ -868,37 +868,6 @@ let check_ocamlfind_package ?min_version ?max_version ?not_found conf name =
 ;;
 
 
-(*c==v=[OCaml_conf.detect_xml_light]=0.3====*)
-let detect_xml_light ?(modes=[`Byte;`Opt]) conf =
-  let includes =
-     ["default install", [] ;
-      "+xml-light style", [Filename.concat (ocaml_libdir conf) "xml-light"] ;
-     ]
-  in
-  let includes =
-    match ocamlfind_query conf "xml-light" with
-      None -> includes
-    | Some s -> ("with ocamlfind", [s]) :: includes
-  in
-  let libs = ["xml-light.cma"] in
-  let f (mes, includes) mode =
-    let mes = Printf.sprintf "checking for Xml-light (%s) %s... "
-        (string_of_mode mode) mes
-    in
-    can_link ~mes mode conf ~includes ~libs []
-  in
-  let rec iter = function
-      [] -> ([], [])
-    | incs :: q ->
-        let f = f incs in
-        if List.for_all f modes then
-          (snd incs, libs)
-        else
-          iter q
-  in
-  iter includes
-(*/c==v=[OCaml_conf.detect_xml_light]=0.3====*)
-
 let ocaml_required = [3;11];;
 
 let conf = ocaml_conf ();;
@@ -917,15 +886,7 @@ let _ = !print "\n### checking required tools and libraries ###\n"
 
 let () = check_ocamlfind_package conf "config-file";;
 let () = check_ocamlfind_package conf "lablgtk2.sourceview2";;
-
-let _ = add_conf_variables conf;;
-
-let _ =
-  match detect_xml_light ~modes conf with
-    [], [] -> !fatal_error "Could not link with Xml-light"; assert false
-  | l, _ -> add_subst "XMLLIGHT_INCLUDES" (string_of_includes l)
-;;
-
+let () = check_ocamlfind_package conf ~min_version: [1;1] "xmlm";;
 
 let _ = !print "\n###\n"
 

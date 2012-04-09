@@ -26,15 +26,10 @@
 
 include ../master.Makefile
 
-PACKAGES=config-file,lablgtk2.sourceview2
+PACKAGES=config-file,lablgtk2.sourceview2,xmlm
 OF_FLAGS= -package $(PACKAGES)
 
-MY_INCLUDES=
-SYSTEM_INCLUDES= $(XMLLIGHT_INCLUDES)
-
-INCLUDES=$(MY_INCLUDES) $(SYSTEM_INCLUDES)
-
-COMPFLAGS=$(INCLUDES) -annot -g -warn-error A
+COMPFLAGS=-annot -g -warn-error A
 
 GELIB_CMOFILES= \
 	version.cmo \

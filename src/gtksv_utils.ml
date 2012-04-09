@@ -62,7 +62,7 @@ let rc_dir =
 
 let file_sourceviews = Filename.concat rc_dir sourceviews_basename
 
-(** {2 Languages} *)
+(** {2 Languages}Â *)
 
 let source_language_manager =
   GSourceView2.source_language_manager ~default: false;;
@@ -232,8 +232,66 @@ type source_view_props =
     mutable sv_tab_spaces : bool ;
   }
 
+type tree =
+    E of Xmlm.tag * tree list
+  | T of string * (string * string) list * tree list (** simplified element *)
+  | D of string
+
+let string_of_xml tree =
+  try
+    let b = Buffer.create 256 in
+    let output = Xmlm.make_output ~decl: false (`Buffer b) in
+    let frag = function
+    | E (tag, childs) -> `El (tag, childs)
+    | T (tag, atts, childs) ->
+        `El ((("",tag),(List.map (fun (a, v) -> (("",a),v)) atts)), childs)
+    | D d -> `Data d
+    in
+    Xmlm.output_doc_tree frag output (None, tree);
+    Buffer.contents b
+  with
+    Xmlm.Error ((line, col), error) ->
+      let msg = Printf.sprintf "Line %d, column %d: %s"
+        line col (Xmlm.error_message error)
+      in
+      failwith msg
+;;
+
+let source_string = function
+  `String (n, s) -> String.sub s n (String.length s - n)
+| `Channel _ | `Fun _ -> ""
+;;
+
+let xml_of_source source =
+  try
+    let input = Xmlm.make_input ~enc: (Some `UTF_8) source in
+    let el tag childs = E (tag, childs)  in
+    let data d = D d in
+    let (_, tree) = Xmlm.input_doc_tree ~el ~data input in
+    tree
+  with
+    Xmlm.Error ((line, col), error) ->
+      let msg =
+        Printf.sprintf "Line %d, column %d: %s\n%s"
+        line col (Xmlm.error_message error) (source_string source)
+      in
+      failwith msg
+  | Invalid_argument e ->
+      let msg = Printf.sprintf "%s:\n%s" e (source_string source) in
+      failwith msg
+;;
+let xml_of_file file =
+  let ic = open_in file in
+  try
+    xml_of_source (`Channel ic)
+  with
+    e ->
+      close_in ic;
+      raise e
+;;
+
 let xml_of_string_prop name v =
-  Xml.Element ("prop",["name",name;"value",v],[])
+  T ("prop",["name",name;"value",v],[])
 let string_of_opt = function
   None -> ""
 | Some s -> s
@@ -258,10 +316,10 @@ let xml_of_svprops st =
 
 let xml_store_sourceview_props ~file svprops =
   let l = xml_of_svprops svprops in
-  let xml = Xml.Element ("sourceview", [], l) in
+  let xml = T ("sourceview", [], l) in
   let oc = open_out file in
   output_string oc "<?xml version=\"1.0\"?>\n";
-  output_string oc (Xml.to_string_fmt xml);
+  output_string oc (string_of_xml xml);
   close_out oc
 
 
@@ -276,15 +334,15 @@ let empty_sourceview_props () =
 let find_prop_of_xml name l =
   try
     let pred = function
-      Xml.Element ("prop",atts,_) ->
+      E ((("","prop"),atts),_) ->
         List.exists
-          (function ("name",s) -> s = name | _ -> false)
+          (function (("","name"),s) -> s = name | _ -> false)
           atts
     |	_ -> false
     in
     match List.find pred l with
-      Xml.Element ("prop",atts,_) ->
-        Some (List.assoc "value" atts)
+      E ((("","prop"),atts),_) ->
+        Some (List.assoc ("","value") atts)
     | _ -> assert false
   with
     Not_found -> None
@@ -310,7 +368,7 @@ let bool_prop_of_xml name l =
   | _ -> false
 
 let source_view_props_of_xml = function
-  Xml.Element ("sourceview", _, l) ->
+  E ((("","sourceview"), _), l) ->
     Some
       {
         sv_font = string_opt_prop_of_xml "font" l ;
@@ -324,11 +382,12 @@ let source_view_props_of_xml = function
 let xml_read_sourceview_props ~file =
   let error s = failwith (Printf.sprintf "File %s: %s" file s) in
   try
-    let xml = Xml.parse_file file in
+    let xml = xml_of_file file in
     source_view_props_of_xml xml
   with
-    Xml.Error e ->
-      error (Xml.error e)
+    Failure msg ->
+      error msg
+;;
 
 let svprops_of_source_view sv =
   { sv_font = None ;
@@ -378,7 +437,7 @@ let read_sourceview_props () =
       None -> empty_sourceview_props ()
     | Some st -> st
   with
-    Xml.File_not_found _ ->
+    Sys_error _ ->
       empty_sourceview_props ()
 
 

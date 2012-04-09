@@ -66,8 +66,6 @@ CWLIB_BYTE=@CWLIB_BYTE@
 
 ROOT=@ROOT@
 
-XMLLIGHT_INCLUDES= @XMLLIGHT_INCLUDES@
-
 # some common targets :
 #######################
 first:
