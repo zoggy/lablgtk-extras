@@ -35,8 +35,7 @@ ses propres sortes de champs pour ajouter à ceux existants.
 </fr>
 <sample><![CDATA[
 (* Compile with
-  ocamlc -o example.x -I +lablgtk2 -I +cameleon2 lablgtk.cma \
-    okey.cmo config_file.cmo configwin.cma <this_file>
+  ocamlfind ocamlc -o example.x -package lablgtk2-extras.configwin -linkpkg <this_file>
 *)
 
 let _ = GMain.Main.init ()

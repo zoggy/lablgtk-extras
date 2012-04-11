@@ -29,12 +29,27 @@ des application en OCaml avec la bibliothèque LablGtk2.
 <linkline>
 <link href="http://forge.ocamlcore.org/projects/gtk-extras/"><en>Project page on OCaml forge</en><fr>Page du projet sur la forge OCaml</fr></link>
 <link href="http://caml.inria.fr/">Objective-Caml</link>
-<link href="http://www.math.nagoya-u.ac.jp/~garrigue/soft/olabl/lablgtk.html">LablGtk2</link>
+<link href="http://lablgtk.forge.ocamlcore.org/">LablGtk2</link>
 </linkline>
 </section>
 
 <section name="news">
 <title><en>News</en><fr>Actualités</fr></title>
+<p>
+<b>2012-04-11:</b>
+<en> Lablgtk-extras now uses findlib to compile an install, as packages </en>
+<fr> Lablgtk-extras utilise maintenant findlib pour la compilation
+et l'installation, produisant les paquets </fr>
+"lablgtk2-extras"
+<en> and </en>
+<fr> et </fr>
+"lablgtk2-extras.configwin". Xmlm
+<en> is used instead of </en>
+<fr> est utilisé à la place de </fr>
+Xml-light.
+<en> This is release 1.1.</en>
+<fr> C'est la version 1.1.</fr>
+</p>
 <p>
 <b>2011-01-12:</b>
 <en> Lablgtk-extras is created, by extracting reusable LablGtk2 convenient modules from Cameleon2.</en>

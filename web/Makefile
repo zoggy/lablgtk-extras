@@ -27,8 +27,9 @@ all: $(XML_FILES)
 	(cd $(ROOT)/src && $(MAKE) camlget && $(CP) -r ocamldoc $(DEST_DIR)/)
 	$(CP) $(DEST_DIR)/index.en.html $(DEST_DIR)/index.html
 	$(CP) -r img $(DEST_DIR)
+	$(MKDIR) $(DEST_DIR)/refdoc
+	$(CP) ../src/ocamldoc/* $(DEST_DIR)/refdoc/
 	rpl "&amp;&amp;" "&&" $(DEST_DIR)/*.html
-#	cp back.jpg top.jpg bottom.jpg $(DEST_DIR)
 
 installsite:all
 	scp -r $(DEST_DIR)/* $(REMOTE_DEST)

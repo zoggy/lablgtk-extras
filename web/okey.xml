@@ -33,7 +33,7 @@ l'application.
 </fr>
 <sample><![CDATA[
 (* Compile with
-  ocamlc -o okey_example.x -I +lablgtk2 -I +cameleon2 lablgtk.cma okey.cmo <this_file> *)
+  ocamlfind ocamlc -o okey_example.x -package lablgtk2-extras -linkpkg <this_file> *)
 
 let _ = GMain.Main.init ()
 let w = GWindow.window

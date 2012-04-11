@@ -3,9 +3,10 @@
 <p class="release">
 <en>Latest release is </en>
 <fr>La dernière version est </fr>
-<link href="https://forge.ocamlcore.org/frs/download.php/555/lablgtkextras-1.1.tar.gz">1.0</link> (2012-04-11).<br/>
+<link href="https://forge.ocamlcore.org/frs/download.php/846/lablgtkextras-1.1.tar.gz">1.1</link> (2012-04-11).<br/>
 </p>
-<p><en>Use findlib to compile and install.</en><fr>Utilise findlib pour compiler et installer.</fr></p>
+<p><en>Changes: Use findlib to compile and install. Use Xmlm instead of Xml-light.</en>
+<fr>Changements: Utilise findlib pour compiler et installer. Utilise Xmlm au lieu de Xml-light.</fr></p>
 
 <!--
 <p class="warning">
