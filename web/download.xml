@@ -1,57 +1,57 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <page name="downloads" sidebar="true">
-<title><en>Downloads</en><fr>Téléchargements</fr>
+<title><en>Downloads</en><fr>TÃ©lÃ©chargements</fr>
 </title>
 <section name="downloads:general">
 <title>
 <en>General information</en>
-<fr>Informations générales</fr>
+<fr>Informations gÃ©nÃ©rales</fr>
 </title>
 <p>
 <en>Lablgtk-extras is </en>
 <fr>Lablgtk-extras est </fr>
 <link href="https://forge.ocamlcore.org/frs/?group_id=213"><en>downloadable here</en>
-<fr>téléchargeable ici</fr></link>.
+<fr>tÃ©lÃ©chargeable ici</fr></link>.
 <br/>
 <en>You can also access the </en>
-<fr>Vous pouvez aussi accéder au </fr>
+<fr>Vous pouvez aussi accÃ©der au </fr>
 <link href="https://forge.ocamlcore.org/scm/?group_id=213"><en>Git repository</en>
-<fr>Dépôt Git</fr></link>.
+<fr>DÃ©pÃ´t Git</fr></link>.
 </p>
 <p>
 <en>See the INSTALL file for installation procedure.</en>
-<fr>Voir le fichier INSTALL pour la procédure d'installation.</fr>
+<fr>Voir le fichier INSTALL pour la procÃ©dure d'installation.</fr>
 </p>
 </section>
 <include file="latest.xml"/>
 <section name="downloads:requirements">
 <title>
 <en>Requirements</en>
-<fr>Pré-requis</fr>
+<fr>PrÃ©-requis</fr>
 </title>
 <p>
 <en>The following libraries are required to compile Lablgtk-extras:</en>
-<fr>Les bibliothèques suivantes sont requises pour compiler Lablgtk-extras:</fr>
+<fr>Les bibliothÃ¨ques suivantes sont requises pour compiler Lablgtk-extras:</fr>
 </p>
 <ul>
-<li><link href="http://caml.inria.fr/">OCaml 3.12.0</link><en> or above installed</en><fr> ou supérieur installé</fr></li>
+<li><link href="http://caml.inria.fr/">OCaml 3.12.0</link><en> or above installed</en><fr> ou supÃ©rieur installÃ©</fr></li>
 <li><link href="http://lablgtk.forge.ocamlcore.org/">LablGtk 2.14.0</link>
-<en> or above installed (with lablglade and lablgtksourceview2 enabled)</en><fr> ou supérieur installé (avec lablglade et lablgtksourceview2 activés)</fr></li>
+<en> or above installed (with lablglade and lablgtksourceview2 enabled)</en><fr> ou supÃ©rieur installÃ© (avec lablglade et lablgtksourceview2 activÃ©s)</fr></li>
 <li><link href="">Config_file 1.0</link>
-<en> or above installed</en><fr> ou supérieur installé</fr></li>
+<en> or above installed</en><fr> ou supÃ©rieur installÃ©</fr></li>
 <li><link href="http://tech.motion-twin.com/xmllight.html">XML-light 2.2</link>
-<en> or above installed</en><fr> ou supérieur installé</fr></li>
+<en> or above installed</en><fr> ou supÃ©rieur installÃ©</fr></li>
 </ul>
 <tt>make</tt>
 <en> is also required for the compilation process.</en>
-<fr> est également requis pour la compilation.</fr>
+<fr> est Ã©galement requis pour la compilation.</fr>
 </section>
 
 <!--
 <section name="downloads:previous-releases">
 <title>
 <en>Previous releases</en>
-<fr>Versions précédentes</fr>
+<fr>Versions prÃ©cÃ©dentes</fr>
 </title>
 <p class="release">
 <a href="http://download.gna.org/cameleon/cameleon_1.9.19.tar.gz">1.9.19</a> (24 Sep 2009)<br/>

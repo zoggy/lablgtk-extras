@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <section>
 <p class="release">
 <en>Latest release is </en>
-<fr>La dernière version est </fr>
-<link href="https://forge.ocamlcore.org/frs/download.php/555/lablgtkextras-1.0.tar.gz">1.0</link> (2011-01-12).<br/>
+<fr>La derniÃ¨re version est </fr>
+<link href="https://forge.ocamlcore.org/frs/download.php/555/lablgtkextras-1.1.tar.gz">1.0</link> (2012-04-11).<br/>
 </p>
-<p><en>First release.</en><fr>Première version distribuée.</fr></p>
+<p><en>Use findlib to compile and install.</en><fr>Utilise findlib pour compiler et installer.</fr></p>
 
 <!--
 <p class="warning">
 <en> Do not hesitate to download the nightly snapshot of the subversion trunk,
 with more features and bug fixes:</en>
-<fr> N'hésitez pas à télécharger la dernière version du dépôt, dans une archive créée chaque
+<fr> N'hÃ©sitez pas Ã  tÃ©lÃ©charger la derniÃ¨re version du dÃ©pÃ´t, dans une archive crÃ©Ã©e chaque
 nuit:</fr>
 <link href="http://download.gna.org/cameleon/cameleon_snapshot.tar.gz">Nightly snapshot</link>.
 </p>
