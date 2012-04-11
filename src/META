@@ -6,6 +6,7 @@ archive(byte) = "lablgtkextras.cma"
 archive(native) = "lablgtkextras.cmxa"
 
 package "configwin" (
+  version = "1.1"
   description = "Easy build of configuration window with GTK"
   requires = "lablgtk2-extras"
   archive(byte) = "configwin.cma"
