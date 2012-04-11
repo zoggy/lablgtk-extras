@@ -27,7 +27,8 @@
 (* $Id: okey_example.ml 749 2010-06-17 06:52:00Z zoggy $ *)
 
 (* Compile with
-  ocamlc -o okey_example.x -I +lablgtk2 -I +lablgtk-extras lablgtk.cma lablgtkextras.cma <this_file> *)
+    ocamlfind ocamlc -package lablgtk2-extras -linkpkg \
+  -o okey_example.x <this_file> *)
 
 let _ = GMain.Main.init ()
 let w = GWindow.window

@@ -26,8 +26,8 @@
 (* $Id: example2.ml 749 2010-06-17 06:52:00Z zoggy $ *)
 
 (* Compile with
-  ocamlc -o configwin_example.x -I +lablgtk2 -I +lablgtk-extras lablgtk.cma \
-    okey.cmo config_file.cmo configwin.cma <this_file>
+  ocamlfind ocamlc -package lablgtk2-extras.configwin -linkpkg \
+  -o configwin_example2.x <this_file>
 *)
 
 let _ = GMain.Main.init ()

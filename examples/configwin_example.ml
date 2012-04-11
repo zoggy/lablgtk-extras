@@ -24,8 +24,8 @@
 (*********************************************************************************)
 
 (* Compile with
-  ocamlc -o configwin_example.x -I +lablgtk2 -I +lablgtk-extras lablgtk.cma \
-    okey.cmo config_file.cmo configwin.cma <this_file>
+  ocamlfind ocamlc -package lablgtk2-extras.configwin -linkpkg \
+  -o configwin_example.x <this_file>
 *)
 
 open Configwin
