@@ -14,3 +14,5 @@ src/version.ml
 src/install.ml
 src/ocamldoc
 examples/*.x
+web/website
+
