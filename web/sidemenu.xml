@@ -11,7 +11,7 @@
 <en>Libraries:</en><fr>Bibliothèques:</fr><br/>
 <local href="configwin">Configwin</local><br/>
 <local href="okey">Okey</local><br/>
-<a href="refdoc/Gtksv_utils.html">Gtksv_utils</a>
+<a href="ocamldoc/Gtksv_utils.html">Gtksv_utils</a>
 </section>
 <section>
 <xhtml><img src="img/sitemap.png" alt=""/></xhtml><local href="sitemap"><en>Site map</en><fr>Plan du site</fr></local><br/>

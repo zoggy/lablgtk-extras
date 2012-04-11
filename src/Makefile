@@ -79,7 +79,7 @@ $(CWLIB_BYTE): $(CWLIB_CMIFILES) $(CWLIB_CMOFILES)
 doc:
 	$(RM) ocamldoc
 	mkdir -p ocamldoc
-	$(OCAMLFIND) ocamldoc $(OF_FLAGS) -sort -d ocamldoc -html  -t "Lablgtk-extras" \
+	$(OCAMLFIND) ocamldoc -verbose $(OF_FLAGS) -sort -d ocamldoc -html  -t "Lablgtk-extras" \
 	$(INCLUDES) $(GELIB_CMIFILES:.cmi=.mli) \
 	$(CWLIB:.cmxa=.mli) configwin_keys.ml
 #	$(CP) ocamldoc_style.css ocamldoc/style.css
