@@ -36,6 +36,11 @@ des application en OCaml avec la bibliothèque LablGtk2.
 <section name="news">
 <title><en>News</en><fr>Actualités</fr></title>
 <p>
+<b>2012-11-14:</b>
+<en> Use Lablgtk-2.16.0. This is release 1.2.</en>
+<fr> Utilise Lablgtk-2.16.0. C'est la version 1.2.</fr>
+</p>
+<p>
 <b>2012-04-11:</b>
 <en> Lablgtk-extras now uses findlib to compile an install, as packages </en>
 <fr> Lablgtk-extras utilise maintenant findlib pour la compilation

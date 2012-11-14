@@ -35,7 +35,7 @@
 </p>
 <ul>
 <li><link href="http://caml.inria.fr/">OCaml 3.12.0</link><en> or above installed</en><fr> ou supérieur installé</fr></li>
-<li><link href="http://lablgtk.forge.ocamlcore.org/">LablGtk 2.14.2 </link>
+<li><link href="http://lablgtk.forge.ocamlcore.org/">LablGtk 2.16.0 </link>
 <en> or above installed with findlib (with lablgtksourceview2 enabled)</en>
 <fr> ou supérieur installé avec findlib (avec lablgtksourceview2 activé)</fr></li>
 <li><link href="http://config-file.forge.ocamlcore.org/">Config_file 1.1</link>
