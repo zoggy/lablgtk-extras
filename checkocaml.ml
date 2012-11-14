@@ -28,7 +28,7 @@
 
 (* $Id$ *)
 
-(*c==m=[OCaml_conf]=0.3=t==*)
+(*c==m=[OCaml_conf]=0.8=t==*)
 
 
   open Sys
@@ -128,7 +128,7 @@ let list_of_path = Str.split path_sep_regexp;;
 (** [path_of_list paths] builds a string in path format.
    @raise Path if a path contains the separator. *)
 let path_of_list paths =
-  (* Un nom de fichier dans un chemin ne doit pas contenir le séparateur... *)
+  (* Un nom de fichier dans un chemin ne doit pas contenir le sÃ©parateur... *)
   let check s =
     if Str.string_match path_sep_regexp s 0 then
       let pos = Str.match_beginning() in
@@ -184,7 +184,7 @@ let testfile flags filename =
     access filename access_flags;
     flags = [] ||
     begin
-      let st = (if List.mem Flnk flags then stat else lstat) filename in
+      let st = (if List.mem Flnk flags then lstat else stat) filename in
       let rec test = function
         | Fdir -> st.st_kind = S_DIR
         | Freg -> st.st_kind = S_REG
@@ -264,13 +264,13 @@ let unlink_f file =
   else
     let files =
       if Filename.check_suffix file ".mli" then
-        [file; (Filename.chop_extension file)^".cmi"]
+	[file; (Filename.chop_extension file)^".cmi"]
       else
-        if Filename.check_suffix file ".ml" then
-          let base = Filename.chop_extension file in
-          [file; base^".cmi" ; base^".cmo" ; base^".cmx"; base^".o" ]
+	if Filename.check_suffix file ".ml" then
+	  let base = Filename.chop_extension file in
+	  [file; base^".cmi" ; base^".cmo" ; base^".cmx"; base^".o" ]
 	else
-          [file]
+	  [file]
     in
     let f file =
       try unlink file with Unix_error (ENOENT, _, _) -> ()
@@ -481,7 +481,7 @@ let ocaml_prog ?(err=true) file =
   !print (Printf.sprintf "checking for %s... " file);
   match
     handle_unix_error
-      (fun () -> find_in_path (testfile [Fexecutable]) (get_path()) file)
+      (fun () -> find_in_path (testfile [Fexecutable;Freg]) (get_path()) file)
       ()
   with
     [] ->
@@ -568,14 +568,14 @@ let check_for_opt_prog version prog =
   | _ ->
       let opt = Printf.sprintf "%s.opt" (Filename.basename prog) in
       try
-	let opt = ocaml_prog opt in
-	check_version
-	  ~on_err:(fun m -> !print (m^"\n"); raise (Program_not_found ""))
-	  version opt;
-	!print (Printf.sprintf "we can use %s\n" opt);
-	opt
+        let opt = ocaml_prog opt in
+        check_version
+          ~on_err:(fun m -> !print (m^"\n"); raise (Program_not_found ""))
+          version opt;
+	    !print (Printf.sprintf "we can use %s\n" opt);
+	    opt
       with
-	Program_not_found _ -> prog
+	    Program_not_found _ -> prog
 
 (** [get_opt_conf conf] returns the same configuration where some program
    names have been replaced by the "opt" version (["..../ocamlc.opt"] instead
@@ -763,6 +763,79 @@ let ocamlfind_query conf package =
       with
 	_ -> None
 
+let ocamlfind_query_version conf package =
+  match conf.ocamlfind with
+    "" -> None
+  | _ ->
+      try
+        match exec_and_get_first_line conf.ocamlfind
+          [| "query" ; "-format" ; "%v" ; package |]
+        with
+          "" -> None
+        | s -> Some s
+      with
+        _ -> None
+;;
+
+let check_ocamlfind_package ?min_version ?max_version ?(fail=true) ?not_found conf name =
+  !print (Printf.sprintf "checking for %s... " name);
+  let not_found =
+    match not_found with
+      None ->
+        begin
+        function
+          | `Package_not_installed pkg ->
+              let msg = Printf.sprintf "Package %s not found\n" pkg in
+              if fail then
+                !fatal_error msg
+              else
+                !print msg
+          | `Package_bad_version version ->
+              let msg =
+                (Printf.sprintf "Package %s found with version %s, but wanted %s%s%s\n"
+                 name version
+                 (match min_version with
+                    None -> ""
+                  | Some v -> Printf.sprintf ">= %s" (string_of_version v)
+                 )
+                 (match min_version, max_version with
+                    Some _, Some _ -> " and "
+                  | _ -> ""
+                 )
+                 (match max_version with
+                    None -> ""
+                  | Some v -> Printf.sprintf "<= %s" (string_of_version v)
+                 )
+                )
+              in
+              if fail then
+                !fatal_error msg
+              else
+                !print msg
+        end
+    | Some f -> f
+  in
+   match ocamlfind_query conf name with
+      None -> not_found (`Package_not_installed name); false
+    | Some s ->
+        match min_version, max_version with
+          None, None -> !print "ok\n"; true
+        | _ ->
+            match ocamlfind_query_version conf name with
+              None -> not_found (`Package_bad_version "<no version>"); false
+            | Some s ->
+                let version = version_of_string s in
+                let min = match min_version with None -> [] | Some v -> v in
+                let max = match max_version with None -> [max_int] | Some v -> v in
+                if version < min or version > max then
+                  (
+                   not_found (`Package_bad_version s);
+                   false
+                  )
+                else
+                  ( !print "ok\n" ; true )
+;;
+
 (** {2:substs Handling substitutions specification} *)
 
 let substs = Hashtbl.create 37
@@ -807,66 +880,7 @@ let add_conf_variables c =
    List.iter (fun (var,v) -> add_subst var v) l
 
 
-(*/c==m=[OCaml_conf]=0.3=t==*)
-
-let ocamlfind_query_version conf package =
-  match conf.ocamlfind with
-    "" -> None
-  | _ ->
-      try
-        match exec_and_get_first_line conf.ocamlfind
-          [| "query" ; "-format" ; "%v" ; package |]
-        with
-          "" -> None
-        | s -> Some s
-      with
-        _ -> None
-;;
-
-let check_ocamlfind_package ?min_version ?max_version ?not_found conf name =
-  !print (Printf.sprintf "checking for %s... " name);
-  let not_found =
-    match not_found with
-      None ->
-        begin
-        function
-          | `Package_not_installed pkg ->
-              !fatal_error (Printf.sprintf "Package %s not found" pkg)
-          | `Package_bad_version version ->
-              !fatal_error
-              (Printf.sprintf "Package %s found with version %s, but wanted %s%s%s"
-               name version
-               (match min_version with
-                  None -> ""
-                | Some v -> Printf.sprintf ">= %s" (string_of_version v)
-               )
-               (match min_version, max_version with
-                 Some _, Some _ -> " and "
-                | _ -> ""
-               )
-               (match max_version with
-                  None -> ""
-                | Some v -> Printf.sprintf "<= %s" (string_of_version v)
-               )
-              )
-        end
-    | Some f -> f
-  in
-   match ocamlfind_query conf name with
-      None -> not_found (`Package_not_installed name)
-    | Some s ->
-      match ocamlfind_query_version conf name with
-        None -> not_found (`Package_bad_version "<no version>")
-      | Some s ->
-          let version = version_of_string s in
-          let min = match min_version with None -> [] | Some v -> v in
-          let max = match max_version with None -> [max_int] | Some v -> v in
-          if version < min or version > max then
-            not_found (`Package_bad_version s)
-          else
-            !print "ok\n"
-;;
-
+(*/c==m=[OCaml_conf]=0.8=t==*)
 
 let ocaml_required = [3;11];;
 
@@ -884,9 +898,10 @@ let _ =
 
 let _ = !print "\n### checking required tools and libraries ###\n"
 
-let () = check_ocamlfind_package conf "config-file";;
-let () = check_ocamlfind_package conf "lablgtk2.sourceview2";;
-let () = check_ocamlfind_package conf ~min_version: [1;1] "xmlm";;
+let _ = check_ocamlfind_package conf "config-file";;
+let _ = check_ocamlfind_package conf ~min_version: [2;16;0] "lablgtk2";;
+let _ = check_ocamlfind_package conf "lablgtk2.sourceview2";;
+let _ = check_ocamlfind_package conf ~min_version: [1;1] "xmlm";;
 
 let _ = !print "\n###\n"
 
