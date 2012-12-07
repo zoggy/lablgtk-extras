@@ -27,7 +27,7 @@
 # check for one particular file of the sources
 AC_INIT(master.Makefile.in)
 
-VERSION=1.2
+VERSION=1.3
 PACKAGE_NAME=lablgtk2-extras
 
 # The root directory where we will compile
@@ -133,11 +133,11 @@ AC_SUBST(CWLIB_BYTE)
 AC_SUBST(XMLLIGHT_INCLUDES)
 
 # Finally create the master.Makefile.in and other files
-ACFILES="master.Makefile src/version.ml src/install.ml"
+ACFILES="master.Makefile src/gtke_version.ml src/gtke_install.ml"
 
 AC_OUTPUT($ACFILES)
 chmod a-w master.Makefile
-chmod a-w src/version.ml src/install.ml master.Makefile
+chmod a-w src/gtke_version.ml src/gtke_install.ml master.Makefile
 
 # List values
 echo "

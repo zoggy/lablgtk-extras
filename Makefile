@@ -45,11 +45,11 @@ srcdoc: dummy
 
 # myself
 
-master.Makefile src/version.ml src/install.ml: \
-	master.Makefile.in src/version.ml.in src/install.ml.in config.status
+master.Makefile src/gtke_version.ml src/gtke_install.ml: \
+	master.Makefile.in src/gtke_version.ml.in src/gtke_install.ml.in config.status
 	./config.status
 
-config.status: configure master.Makefile.in src/version.ml.in src/install.ml.in
+config.status: configure master.Makefile.in src/gtke_version.ml.in src/gtke_install.ml.in
 	./config.status --recheck
 
 configure: configure.ac

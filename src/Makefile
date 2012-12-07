@@ -32,8 +32,8 @@ OF_FLAGS= -package $(PACKAGES)
 COMPFLAGS=-annot -g -warn-error A
 
 GELIB_CMOFILES= \
-	version.cmo \
-	install.cmo \
+	gtke_version.cmo \
+	gtke_install.cmo \
 	gstuff.cmo \
 	okey.cmo \
 	gdir.cmo \
