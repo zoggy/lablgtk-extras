@@ -36,6 +36,16 @@ des application en OCaml avec la bibliothèque LablGtk2.
 <section name="news">
 <title><en>News</en><fr>Actualités</fr></title>
 <p>
+<b>2012-12-07:</b>
+<en> Rename modules: </en>
+<fr> Renommage de modules: </fr>
+<code>Install =&gt; Gtke_install</code>
+<en> and </en><fr> et </fr>
+<code>Version =&gt; Gtke_version</code>
+<en> to prevent name conflicts. This is release 1.3.</en>
+<fr> pour éviter les conflits de noms. C'est la version 1.3.</fr>
+</p>
+<p>
 <b>2012-11-14:</b>
 <en> Use Lablgtk-2.16.0. This is release 1.2.</en>
 <fr> Utilise Lablgtk-2.16.0. C'est la version 1.2.</fr>

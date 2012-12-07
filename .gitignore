@@ -10,8 +10,8 @@ ocaml_config.sh
 config.status
 configure.lineno
 autom4te.cache
-src/version.ml
-src/install.ml
+src/gtke_version.ml
+src/gtke_install.ml
 src/ocamldoc
 examples/*.x
 web/website
