@@ -36,7 +36,7 @@ des application en OCaml avec la bibliothèque LablGtk2.
 <section name="news">
 <title><en>News</en><fr>Actualités</fr></title>
 <p>
-<b>2013-10-25:</b>
+<b>2013-10-15:</b>
 <en> Remove deprecated "or" operators. This is release 1.4.</en>
 <fr> Remplacement des "or" par des "||". C'est la version 1.4.</fr>
 </p>
