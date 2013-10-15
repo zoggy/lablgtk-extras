@@ -48,7 +48,7 @@ let subdirs path =
     match file with
     | None -> List.rev acc
     | Some s when
-	s = Filename.parent_dir_name or
+	s = Filename.parent_dir_name ||
 	s = Filename.current_dir_name -> iter acc
     | Some file ->
         try
