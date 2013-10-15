@@ -3,13 +3,10 @@
 <p class="release">
 <en>Latest release is </en>
 <fr>La dernière version est </fr>
-<link href="https://forge.ocamlcore.org/frs/download.php/1072/lablgtkextras-1.3.tar.gz">1.3</link> (2012-12-07).<br/>
+<link href="https://forge.ocamlcore.org/frs/download.php/1282/lablgtkextras-1.4.tar.gz">1.4</link> (2013-10-15).<br/>
 </p>
-<p><en>Changes: modlue renaming:</en>
-<fr>Changements: renommage de modules: </fr>
-<code>Install =&gt; Gtke_install</code>
-<en> and </en><fr> et </fr>
-<code>Version =&gt; Gtke_version</code>
+<p><en>Remove "or" operators.</en>
+<fr>Suppression des opérateurs "or".</fr>
 </p>
 <!--
 <p><en>Changes: Use findlib to compile and install. Use Xmlm instead of Xml-light.</en>
