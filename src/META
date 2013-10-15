@@ -1,6 +1,6 @@
 description = "Additional libraries for Lablgtk2"
 requires = "unix,xmlm,lablgtk2,config-file,lablgtk2.sourceview2"
-version = "1.3"
+version = "1.4"
 
 archive(byte) = "lablgtkextras.cma"
 archive(native) = "lablgtkextras.cmxa"
