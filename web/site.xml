@@ -36,6 +36,11 @@ des application en OCaml avec la bibliothèque LablGtk2.
 <section name="news">
 <title><en>News</en><fr>Actualités</fr></title>
 <p>
+<b>2014-09-11:</b>
+<en> Remove deprecated String.create. No more fatal error on "deprecated" warning. This is release 1.5.</en>
+<fr> Suppression des String.create. Un warning deprecated n'entraîne plus une erreur. C'est la version 1.5.</fr>
+</p>
+<p>
 <b>2013-10-15:</b>
 <en> Remove deprecated "or" operators. This is release 1.4.</en>
 <fr> Remplacement des "or" par des "||". C'est la version 1.4.</fr>
