@@ -27,7 +27,7 @@
 # check for one particular file of the sources
 AC_INIT(master.Makefile.in)
 
-VERSION=1.4
+VERSION=1.5
 PACKAGE_NAME=lablgtk2-extras
 
 # The root directory where we will compile
