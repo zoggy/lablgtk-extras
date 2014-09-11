@@ -496,11 +496,13 @@ class color_param_box param (tt:GData.tooltips) =
 	  let g = (Gdk.Color.green color)in
 	  let b = (Gdk.Color.blue color) in
 	  let s = Printf.sprintf "#%4X%4X%4X" r g b in
-	  let _ =
-	    for i = 1 to (String.length s) - 1 do
-	      if s.[i] = ' ' then s.[i] <- '0'
-	    done
-	  in
+	  let s = String.mapi
+           (fun i -> function
+                  ' ' when i >= 1 -> '0'
+              | c -> c
+           )
+             s
+    in
 	  we#set_text s ;
 	  dialog#destroy ()
 	)

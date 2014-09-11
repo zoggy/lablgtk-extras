@@ -29,7 +29,7 @@ include ../master.Makefile
 PACKAGES=config-file,lablgtk2.sourceview2,xmlm
 OF_FLAGS= -package $(PACKAGES)
 
-COMPFLAGS=-annot -g -warn-error A
+COMPFLAGS=-annot -g -warn-error A-3
 
 GELIB_CMOFILES= \
 	gtke_version.cmo \
