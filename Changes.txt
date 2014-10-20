@@ -1,0 +1,3 @@
+Next release:
+- do not require camlp4 any more
+
