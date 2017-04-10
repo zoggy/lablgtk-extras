@@ -1,9 +1,12 @@
-opam-version: "1"
+opam-version: "1.2"
 maintainer: "zoggy@bat8.org"
 authors: ["Maxence Guesdon"]
-homepage: "http://gtk-extras.forge.ocamlcore.org/"
+homepage: "https://github.com/zoggy/lablgtk-extras"
 license: "GNU Lesser General Public License version 2 or later"
-doc: ["http://gtk-extras.forge.ocamlcore.org/"]
+doc: ["https://github.com/zoggy/lablgtk-extras"]
+dev-repo: "https://github.com/zoggy/lablgtk-extras.git"]
+bug-reports: "https://github.com/zoggy/lablgtk-extras.git/issues"
+
 tags: [
   "gtk"
   "utils"
