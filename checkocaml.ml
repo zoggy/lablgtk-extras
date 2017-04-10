@@ -28,7 +28,7 @@
 
 (* $Id$ *)
 
-(*c==m=[OCaml_conf]=0.10=t==*)
+(*c==m=[OCaml_conf]=0.12=t==*)
 
 
   open Sys
@@ -434,11 +434,40 @@ let dummy_version = [0]
 
 (** [version_of_string s] returns a version number from the given string [s].
    [s] must b in the form [X[.Y[.Z[...]]]]. If the string is not correct,
-   then the dummy version is returned. *)
-let version_of_string s =
-  let l = Str.split (Str.regexp_string ".") s in
-  try List.map int_of_string l
-  with Failure _ -> dummy_version
+   then the dummy version is returned. When the version number is followed
+   by other characters (like '+'), then only the characters before are used
+   to create the version number.*)
+let version_of_string =
+  let is_bad_char = function
+    '.' | '0'..'9' -> false
+  | _ -> true
+  in
+  let keep_good_chars s =
+    let len = String.length s in
+    let b = Buffer.create len in
+    let rec iter i =
+      if i >= len then
+        ()
+      else
+        if i = 0 && String.get s i = 'v'
+        then
+          iter (i+1)
+        else
+          if is_bad_char (String.get s i) then
+            ()
+          else
+            (Buffer.add_char b (String.get s i) ;
+             iter (i+1)
+            )
+    in
+    iter 0;
+    Buffer.contents b
+  in
+  fun s ->
+    let s = keep_good_chars s in
+    let l = Str.split (Str.regexp_string ".") s in
+    try List.map int_of_string l
+    with Failure _ -> dummy_version
 
 (** [string_of_version v] returns a string to display the given version.
    For example, [string_of_version [1;2;3] = "1.2.3"]. *)
@@ -883,7 +912,7 @@ let add_conf_variables c =
    List.iter (fun (var,v) -> add_subst var v) l
 
 
-(*/c==m=[OCaml_conf]=0.10=t==*)
+(*/c==m=[OCaml_conf]=0.12=t==*)
 
 let ocaml_required = [3;11];;
 
