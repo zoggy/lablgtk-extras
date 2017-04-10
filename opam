@@ -4,7 +4,7 @@ authors: ["Maxence Guesdon"]
 homepage: "https://github.com/zoggy/lablgtk-extras"
 license: "GNU Lesser General Public License version 2 or later"
 doc: ["https://github.com/zoggy/lablgtk-extras"]
-dev-repo: "https://github.com/zoggy/lablgtk-extras.git"]
+dev-repo: "https://github.com/zoggy/lablgtk-extras.git"
 bug-reports: "https://github.com/zoggy/lablgtk-extras.git/issues"
 
 tags: [
