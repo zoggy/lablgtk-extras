@@ -1,4 +1,0 @@
-Release 1.6:
-- more robust handling of required tools version numbers
-- do not require camlp4 any more
-
